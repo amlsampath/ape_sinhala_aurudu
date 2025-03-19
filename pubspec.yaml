@@ -35,6 +35,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   hexcolor: ^3.0.1
+  permission_handler: ^11.4.0
+  flutter_compass: ^0.8.1
+  sinhala_unicode_converter: ^1.0.6
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +82,12 @@ flutter:
     - family: FMBindumathi
       fonts:
         - asset: assets/fonts/FMBindumathix.ttf
+    - family: FMGanganeex
+      fonts:
+        - asset: assets/fonts/FMGanganeex.ttf
+    - family: FMEmaneex
+      fonts:
+        - asset: assets/fonts/FMEmaneex.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

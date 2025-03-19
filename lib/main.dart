@@ -1,4 +1,4 @@
-import 'package:ape_sinhala_aurudu/pages/welcome_screen.dart';
+import 'package:ape_sinhala_aurudu/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: WelcomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

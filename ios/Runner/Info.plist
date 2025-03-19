@@ -45,5 +45,14 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need access to your location to provide compass functionality.</string>
+
+<key>NSLocationAlwaysUsageDescription</key>
+<string>We need access to your location to improve accuracy.</string>
+
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>We need access to your location to provide compass functionality even when the app is in use.</string>
+
 </dict>
 </plist>
