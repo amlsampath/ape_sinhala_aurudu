@@ -101,7 +101,7 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
             child: Container(color: const Color.fromARGB(222, 255, 255, 255)),
           ),
           Positioned(
-            top: 40,
+            top: 10,
             left: 20,
             child: Row(
               children: [

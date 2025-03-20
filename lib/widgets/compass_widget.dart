@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
@@ -11,16 +12,61 @@ class CompassScreen extends StatefulWidget {
 }
 
 class _CompassScreenState extends State<CompassScreen> {
-  double? _heading = 0; // Initial heading value
+  double? _heading = 0;
+  bool _hasCompass = false;
+  String _debugInfo = '';
+  StreamSubscription<CompassEvent>? _compassSubscription;
 
   @override
   void initState() {
     super.initState();
-    FlutterCompass.events!.listen((event) {
-      setState(() {
-        _heading = event.heading;
-      });
-    });
+    _initCompass();
+  }
+
+  @override
+  void dispose() {
+    _compassSubscription?.cancel();
+    super.dispose();
+  }
+
+  void _initCompass() async {
+    try {
+      bool? hasCompass = await FlutterCompass.events?.isEmpty;
+
+      if (mounted) {
+        setState(() {
+          _hasCompass = hasCompass == false; // if events stream is not empty
+          _debugInfo =
+              'Compass Status: ${_hasCompass ? 'Available' : 'Not Available'}';
+        });
+      }
+
+      if (_hasCompass) {
+        _compassSubscription = FlutterCompass.events!.listen(
+          (event) {
+            if (mounted && event.heading != null) {
+              setState(() {
+                _heading = event.heading;
+                _debugInfo = 'Heading: ${_heading?.toStringAsFixed(1)}°';
+              });
+            }
+          },
+          onError: (e) {
+            setState(() {
+              _debugInfo = 'Error: $e';
+              _hasCompass = false;
+            });
+          },
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _debugInfo = 'Init Error: $e';
+          _hasCompass = false;
+        });
+      }
+    }
   }
 
   // 🔹 Get Direction from Heading (Sinhala Labels)
@@ -56,26 +102,54 @@ class _CompassScreenState extends State<CompassScreen> {
         children: [
           Center(
             child: Transform.rotate(
-              angle:
-                  ((_heading ?? 0) *
-                      (math.pi / 180) *
-                      -1), // Convert to radians
-              child: Image.asset(
-                'assets/compass.png', // 📌 Compass Image
-                width: 300,
-                height: 300,
-              ),
+              angle: ((_heading ?? 0) * (math.pi / 180) * -1),
+              child: Image.asset('assets/compass.png', width: 300, height: 300),
             ),
           ),
           const SizedBox(height: 20),
           Text(
-            _heading.toString(),
+            '${_heading?.toStringAsFixed(1) ?? '0.0'}°',
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Text(
             _getDirectionFromHeading(_heading ?? 0),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
+          if (!_hasCompass) ...[
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(8),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Column(
+                children: [
+                  const Text(
+                    'Compass sensor not found on this device',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  if (_debugInfo.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      _debugInfo,
+                      style: TextStyle(
+                        color: Colors.red.withOpacity(0.7),
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );
