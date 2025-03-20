@@ -112,7 +112,6 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () {
-                          print('Back button tapped'); // Debug print
                           Navigator.of(context).pop();
                         },
                         child: Container(
@@ -133,97 +132,96 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20),
-                    Row(
-                      children: [
-                        Text(
-                          SinhalaUnicode.sinhalaToUnicode("නව අවුරුදු ගණන්"),
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'FMEmaneex',
-                          ),
-                        ),
-                      ],
+                    const SizedBox(width: 20),
+                    Text(
+                      SinhalaUnicode.sinhalaToUnicode("නව අවුරුදු ගණන්"),
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'FMEmaneex',
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: size.height * .15),
-                  widget.nekathModel.fullDate == null
-                      ? Container()
-                      : Text(
-                        SinhalaUnicode.sinhalaToUnicode(
-                          widget.nekathModel.fullDate!,
-                        ),
-                        style: TextStyle(
-                          fontSize: 18,
-
-                          fontFamily: 'FMBindumathi',
-                        ),
-                      ),
-                  SizedBox(height: 10),
-                  // Timer Display
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: HexColor('#FADA7A'),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _buildTimeCard(
-                          _formatTime(_countdownDuration.inDays),
-                          "දින",
-                        ),
-                        _buildTimeCard(
-                          _formatTime(_countdownDuration.inHours.remainder(24)),
-                          "පැය",
-                        ),
-                        _buildTimeCard(
-                          _formatTime(
-                            _countdownDuration.inMinutes.remainder(60),
-                          ),
-                          "මිනිත්තු",
-                        ),
-                        _buildTimeCard(
-                          _formatTime(
-                            _countdownDuration.inSeconds.remainder(60),
-                          ),
-                          "තත්පර",
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  CompassScreen(),
-                  Container(
-                    //  padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 8),
-                        Text(
+            Positioned(
+              top: size.height * 0.15,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    widget.nekathModel.fullDate == null
+                        ? Container()
+                        : Text(
                           SinhalaUnicode.sinhalaToUnicode(
-                            widget.nekathModel.description,
+                            widget.nekathModel.fullDate!,
                           ),
-                          style: TextStyle(
-                            fontSize: 14,
+                          style: const TextStyle(
+                            fontSize: 18,
                             fontFamily: 'FMBindumathi',
                           ),
                         ),
-                        const SizedBox(height: 12),
-                      ],
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: HexColor('#FADA7A'),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildTimeCard(
+                            _formatTime(_countdownDuration.inDays),
+                            "දින",
+                          ),
+                          _buildTimeCard(
+                            _formatTime(
+                              _countdownDuration.inHours.remainder(24),
+                            ),
+                            "පැය",
+                          ),
+                          _buildTimeCard(
+                            _formatTime(
+                              _countdownDuration.inMinutes.remainder(60),
+                            ),
+                            "මිනිත්තු",
+                          ),
+                          _buildTimeCard(
+                            _formatTime(
+                              _countdownDuration.inSeconds.remainder(60),
+                            ),
+                            "තත්පර",
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 12),
+                    const CompassScreen(),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 8),
+                          Text(
+                            SinhalaUnicode.sinhalaToUnicode(
+                              widget.nekathModel.description,
+                            ),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'FMBindumathi',
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
