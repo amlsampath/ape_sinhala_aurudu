@@ -277,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               child: Text(
-                                SinhalaUnicode.sinhalaToUnicode("තවත් විස්තර"),
+                                SinhalaUnicode.sinhalaToUnicode("දිශාව බලන්න"),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,

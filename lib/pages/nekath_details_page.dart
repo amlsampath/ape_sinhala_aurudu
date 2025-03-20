@@ -101,27 +101,33 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
             child: Container(color: const Color.fromARGB(222, 255, 255, 255)),
           ),
           Positioned(
-            top: 40,
+            top: 10,
             left: 20,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(40),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2), // Shadow color
-                      blurRadius: 10, // Softness of the shadow
-                      spreadRadius: 2, // Spread of the shadow
-                      offset: Offset(4, 4), // Position of the shadow (x, y)
+            child: SafeArea(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    print('Back button tapped'); // Debug print
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(40),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 10,
+                          spreadRadius: 2,
+                          offset: const Offset(4, 4),
+                        ),
+                      ],
                     ),
-                  ],
+                    child: const Icon(Icons.arrow_back),
+                  ),
                 ),
-                child: Icon(Icons.arrow_back),
               ),
             ),
           ),
