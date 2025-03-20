@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ape_sinhala_aurudu/pages/home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -38,7 +40,18 @@ class WelcomeScreen extends StatelessWidget {
           Image.asset('assets/logo.png'),
           SizedBox(height: 40),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {
+              // Save that user has seen welcome screen
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setBool('hasSeenWelcome', true);
+
+              // Navigate to home screen and remove welcome screen from stack
+              if (context.mounted) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+              }
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: HexColor('#443627'),
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 100),

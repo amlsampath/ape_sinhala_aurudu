@@ -38,6 +38,7 @@ dependencies:
   permission_handler: ^11.4.0
   flutter_compass: ^0.8.1
   sinhala_unicode_converter: ^1.0.6
+  shared_preferences: ^2.5.2
 
 dev_dependencies:
   flutter_test:

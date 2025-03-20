@@ -1,13 +1,19 @@
 import 'package:ape_sinhala_aurudu/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ape_sinhala_aurudu/pages/welcome_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final hasSeenWelcome = prefs.getBool('hasSeenWelcome') ?? false;
+  runApp(MyApp(hasSeenWelcome: hasSeenWelcome));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool hasSeenWelcome;
+
+  const MyApp({super.key, required this.hasSeenWelcome});
 
   // This widget is the root of your application.
   @override
@@ -18,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: WelcomeScreen(),
+      home: hasSeenWelcome ? const HomeScreen() : const WelcomeScreen(),
     );
   }
 }
