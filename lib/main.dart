@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: hasSeenWelcome ? const HomeScreen() : const WelcomeScreen(),
+      home: WelcomeScreen(),
     );
   }
 }
