@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ape_sinhala_aurudu/pages/home_screen.dart';
+import 'package:sinhala_unicode_converter/sinhala_unicode_converter.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: HexColor('#f0cc62'),
       body: Column(
@@ -18,27 +21,39 @@ class WelcomeScreen extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Container(),
-              Image.asset('assets/sun.png'),
+              Image.asset('assets/sun.png', height: size.height * .22),
               Positioned(
                 top: 100,
-                left: 20,
-                child: Image.asset('assets/sky.png'),
+                left: 40,
+                child: Image.asset('assets/sky.png', width: size.width * .2),
               ),
               Positioned(
-                top: 160,
-                right: 40,
+                top: 100,
+                right: 60,
                 child: Image.asset('assets/sky2.png'),
               ),
               Positioned(
-                top: 160,
-                left: 50,
+                top: 100,
+                left: 80,
                 child: Image.asset('assets/style1.png'),
               ),
             ],
           ),
           SizedBox(height: 40),
-          Image.asset('assets/logo.png'),
-          SizedBox(height: 40),
+          Image.asset('assets/logo.png', height: size.height * .2),
+          SizedBox(height: 20),
+          Text(
+            SinhalaUnicode.sinhalaToUnicode(
+              "ඔබටත් ඔබගේ පවුලේ සැමටත් සුභම සුභ\nඅවුරුද්දක් වේවා",
+            ),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black54,
+              fontFamily: 'FMEmaneex',
+            ),
+          ),
+          SizedBox(height: size.height * .15),
           ElevatedButton(
             onPressed: () async {
               // Save that user has seen welcome screen
@@ -57,11 +72,12 @@ class WelcomeScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 100),
             ),
             child: Text(
-              'Get Started',
+              SinhalaUnicode.sinhalaToUnicode("පිවිසෙන්න"),
+              textAlign: TextAlign.center,
               style: TextStyle(
+                fontSize: 16,
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
+                fontFamily: 'FMEmaneex',
               ),
             ),
           ),

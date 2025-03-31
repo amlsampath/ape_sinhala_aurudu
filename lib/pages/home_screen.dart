@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
           '''අප්‍රේල් මස 14 වැනි සදුදා පූර්වභාග 04.04 ට තඹ වර්ණ වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා ළිප් බැද ගිනි මොලවා කිරිබතක් ද කැවිලි වර්ගයක් ද දී කිරි සහ විලද ද පිළියෙල කර ගැනීම මැනවි.''',
       shortDate: 'අප්‍රේල් 14',
       fullDate: 'අප්‍රේල් 14 වැනි සදුදා',
+      direction: 'දකුණු දිශාව',
     ),
     NekathModel(
       title: 'ආහාර අනුභය',
@@ -71,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
           '''අප්‍රේල් මස 14 වැනි සදුදා පූර්වභාග 06.44ට මුතු හා ශ්වේත වර්ණ වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා සියලු වැඩ අල්ලා ගනුදෙනු කොට ආහාර අනුභව කිරීම මැනවි.''',
       shortDate: 'අප්‍රේල් 14',
       fullDate: 'අප්‍රේල් 14 වැනි සදුදා',
+      direction: 'දකුණු දිශාව',
     ),
     NekathModel(
       title: 'හිසතෙල් ගෑම',
@@ -79,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
           '''අප්‍රේල් මස 16 වැනි බදාදා පූර්වභාග 09.04ට පච්ච වර්ණ හෙවත් කොළ පැහැති වස්ත්‍රාභරණයෙන් සැරසී උතුරු දිශාව බලා හිසට කොහොඹ පත් ද, පයට කොළොන් පත් ද තබා කොහොඹ පත් යුෂ මිශ්‍ර නානු හා තෙල් ගා ස්නානය කිරීම මැනවි.''',
       shortDate: 'අප්‍රේල් 16',
       fullDate: 'අප්‍රේල් 16 වැනි බදාදා',
+      direction: 'උතුරු දිශාව',
     ),
     NekathModel(
       title: 'රැකීරක්ෂා සදහා පිටත්ව යෑම',
@@ -87,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
           '''අප්‍රේල් මස 17 වැනි බ්‍රහස්පතින්දා පූර්වභාග 09.03ට රන්වන් පැහැති වස්ත්‍රාභරණයෙන් සැරසී කිරිබතක් හා එළකිරි මිශ්‍ර කැවිලි වර්ගයක් අනුභව කර උතුරු දිශාව බලා පිටත්ව යෑම මැනවි.''',
       shortDate: 'අප්‍රේල් 17',
       fullDate: 'අප්‍රේල් 17 වැනි බ්‍රහස්පතින්දා',
+      direction: 'උතුරු දිශාව',
     ),
   ];
   String convertToUnicode(String text) {
@@ -168,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 8),
                     Text(
                       SinhalaUnicode.sinhalaToUnicode(
-                        "නව අවුරුද්දට කාලය ගණනය කරන්න",
+                        "නව අලුත් අවුරුද්දේ  නැකැත් හා වේලාවන්",
                       ),
                       style: TextStyle(
                         fontSize: 16,

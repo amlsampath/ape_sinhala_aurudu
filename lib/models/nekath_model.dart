@@ -4,6 +4,7 @@ class NekathModel {
   final String description;
   final String? shortDate;
   final String? fullDate;
+  final String? direction;
 
   NekathModel({
     required this.title,
@@ -11,5 +12,6 @@ class NekathModel {
     required this.description,
     this.shortDate,
     this.fullDate,
+    this.direction,
   });
 }

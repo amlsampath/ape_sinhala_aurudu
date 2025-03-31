@@ -110,6 +110,7 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
         ),
       ),
       body: Container(
+        height: size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/bg.png'),
@@ -129,6 +130,17 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
                     : Text(
                       SinhalaUnicode.sinhalaToUnicode(
                         widget.nekathModel.fullDate!,
+                      ),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'FMBindumathi',
+                      ),
+                    ),
+                widget.nekathModel.direction == null
+                    ? Container()
+                    : Text(
+                      SinhalaUnicode.sinhalaToUnicode(
+                        widget.nekathModel.direction!,
                       ),
                       style: const TextStyle(
                         fontSize: 18,
@@ -166,7 +178,9 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                const CompassScreen(),
+                widget.nekathModel.direction == null
+                    ? Container()
+                    : CompassScreen(),
                 Container(
                   padding: const EdgeInsets.all(8),
                   child: Text(
