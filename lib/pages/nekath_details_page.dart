@@ -180,7 +180,7 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
                 const SizedBox(height: 12),
                 widget.nekathModel.direction == null
                     ? Container()
-                    : CompassScreen(),
+                    : CompassScreen(nekathModel: widget.nekathModel,),
                 Container(
                   padding: const EdgeInsets.all(8),
                   child: Text(
