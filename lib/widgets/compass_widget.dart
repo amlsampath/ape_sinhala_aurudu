@@ -35,7 +35,7 @@ class _CompassScreenState extends State<CompassScreen> {
 
       if (mounted) {
         setState(() {
-          _hasCompass = hasCompass == false; // if events stream is not empty
+          _hasCompass = hasCompass!; // if events stream is not empty
           _debugInfo =
               'Compass Status: ${_hasCompass ? 'Available' : 'Not Available'}';
         });

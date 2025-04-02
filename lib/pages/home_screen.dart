@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       shortDate: 'මාර්තු 30',
       fullDate: 'මාර්තු 30 වන ඉරිදා',
     ),
+
     NekathModel(
       title: 'පරණ අවුරුද්ද සදහා ස්නානය',
       time: DateTime(2025, 04, 13),
@@ -116,12 +117,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void setCountDown() {
     final currentTime = DateTime.now();
+    availableNekath.clear(); // Clear the list before adding new items
 
     for (var event in events) {
       if (currentTime.isBefore(event.time)) {
         availableNekath.add(event);
       }
     }
+
+    if (availableNekath.isEmpty) {
+      // If no upcoming events, show message
+      return;
+    }
+
+    // Sort events by date
+    availableNekath.sort((a, b) => a.time.compareTo(b.time));
     _countdownDuration = availableNekath[0].time.difference(currentTime);
     setState(() {}); // Refresh UI with the new countdown
   }
@@ -196,109 +206,132 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                SinhalaUnicode.sinhalaToUnicode(
-                                  events[0].title,
-                                ),
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'FMEmaneex',
-                                ),
-                              ),
-                              Text(
-                                SinhalaUnicode.sinhalaToUnicode(
-                                  events[0].fullDate!,
-                                ),
-                                style: TextStyle(
-                                  fontSize: 12,
-
-                                  fontFamily: 'FMBindumathi',
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            SinhalaUnicode.sinhalaToUnicode(
-                              events[0].description,
-                            ),
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: 'FMBindumathi',
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-
-                          // Timer Display
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              _buildTimeCard(
-                                _formatTime(_countdownDuration.inDays),
-                                "දින",
-                              ),
-                              _buildTimeCard(
-                                _formatTime(
-                                  _countdownDuration.inHours.remainder(24),
-                                ),
-                                "පැය",
-                              ),
-                              _buildTimeCard(
-                                _formatTime(
-                                  _countdownDuration.inMinutes.remainder(60),
-                                ),
-                                "මිනිත්තු",
-                              ),
-                              _buildTimeCard(
-                                _formatTime(
-                                  _countdownDuration.inSeconds.remainder(60),
-                                ),
-                                "තත්පර",
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
-
-                          // Button
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return NekathDetailsPage(
-                                        nekathModel: availableNekath[0],
-                                      );
-                                    },
+                      child:
+                          availableNekath.isEmpty
+                              ? Center(
+                                child: Text(
+                                  SinhalaUnicode.sinhalaToUnicode(
+                                    "මෙම වසරේ සියලුම නැකැත් අවසන්",
                                   ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.brown,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'FMEmaneex',
+                                  ),
                                 ),
+                              )
+                              : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        SinhalaUnicode.sinhalaToUnicode(
+                                          availableNekath[0].title,
+                                        ),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'FMEmaneex',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    SinhalaUnicode.sinhalaToUnicode(
+                                      availableNekath[0].fullDate!,
+                                    ),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'FMBindumathi',
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    SinhalaUnicode.sinhalaToUnicode(
+                                      availableNekath[0].description,
+                                    ),
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'FMBindumathi',
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  // Timer Display
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      _buildTimeCard(
+                                        _formatTime(_countdownDuration.inDays),
+                                        "දින",
+                                      ),
+                                      _buildTimeCard(
+                                        _formatTime(
+                                          _countdownDuration.inHours.remainder(
+                                            24,
+                                          ),
+                                        ),
+                                        "පැය",
+                                      ),
+                                      _buildTimeCard(
+                                        _formatTime(
+                                          _countdownDuration.inMinutes
+                                              .remainder(60),
+                                        ),
+                                        "මිනිත්තු",
+                                      ),
+                                      _buildTimeCard(
+                                        _formatTime(
+                                          _countdownDuration.inSeconds
+                                              .remainder(60),
+                                        ),
+                                        "තත්පර",
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  // Button
+                                  if (availableNekath.isNotEmpty)
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return NekathDetailsPage(
+                                                  nekathModel:
+                                                      availableNekath[0],
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.brown,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          SinhalaUnicode.sinhalaToUnicode(
+                                            "දිශාව බලන්න",
+                                          ),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontFamily: 'FMEmaneex',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
-                              child: Text(
-                                SinhalaUnicode.sinhalaToUnicode("දිශාව බලන්න"),
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'FMEmaneex',
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                     const SizedBox(height: 20),
                     // Upcoming Events List
@@ -315,9 +348,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
-                      itemCount: events.length,
+                      itemCount: availableNekath.length,
                       itemBuilder: (context, index) {
-                        return _buildEventCard(events[index]);
+                        if (index == 0) {
+                          return const SizedBox.shrink();
+                        }
+                        return _buildEventCard(availableNekath[index]);
                       },
                     ),
                   ],

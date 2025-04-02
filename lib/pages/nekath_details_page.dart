@@ -100,7 +100,7 @@ class _NekathDetailsPageState extends State<NekathDetailsPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          SinhalaUnicode.sinhalaToUnicode("නව අවුරුදු ගණන්"),
+          SinhalaUnicode.sinhalaToUnicode(widget.nekathModel.title),
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
