@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       direction: 'දකුණු දිශාව',
     ),
     NekathModel(
-      title: 'ආහාර අනුභය',
+      title: 'ආහාර අනුභවය',
       time: DateTime(2025, 04, 14, 06, 44),
       description:
           '''අප්‍රේල් මස 14 වැනි සදුදා පූර්වභාග 06.44ට මුතු හා ශ්වේත වර්ණ වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා සියලු වැඩ අල්ලා ගනුදෙනු කොට ආහාර අනුභව කිරීම මැනවි.''',
@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(height: size.height * .05),
                       Text(
                         SinhalaUnicode.sinhalaToUnicode(
-                          "සුභ අලුත් අවුරුද්දක් වේවා",
+                          "සුභ අලුත් අවුරුද්දක් වේවාæ",
                         ),
                         style: TextStyle(
                           fontSize: 24,
@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 8),
                       Text(
                         SinhalaUnicode.sinhalaToUnicode(
-                          "නව අලුත් අවුරුද්දේ  නැකැත් හා වේලාවන්",
+                          "අලුත් අවුරුද්දේ  නැකැත් හා වේලාවන්",
                         ),
                         style: TextStyle(
                           fontSize: 16,
@@ -325,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Text(
                                             SinhalaUnicode.sinhalaToUnicode(
-                                              "දිශාව බලන්න",
+                                              "විස්තර බලන්න",
                                             ),
                                             style: TextStyle(
                                               color: Colors.white,

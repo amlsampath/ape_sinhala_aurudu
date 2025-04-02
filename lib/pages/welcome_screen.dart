@@ -43,12 +43,10 @@ class WelcomeScreen extends StatelessWidget {
           Image.asset('assets/logo.png', height: size.height * .2),
           SizedBox(height: 20),
           Text(
-            SinhalaUnicode.sinhalaToUnicode(
-              "ඔබටත් ඔබගේ පවුලේ සැමටත් සුභම සුභ\nඅවුරුද්දක් වේවා",
-            ),
+            SinhalaUnicode.sinhalaToUnicode("සුභ අලුත් අවුරුද්දක් වේවාæ"),
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 26,
               color: Colors.black54,
               fontFamily: 'FMEmaneex',
             ),
