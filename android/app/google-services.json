@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "471068843741",
+    "project_id": "ape-sinhala-aurudu",
+    "storage_bucket": "ape-sinhala-aurudu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471068843741:android:8265089641251802c0c534",
+        "android_client_info": {
+          "package_name": "com.app_master_institute.ape_sinhala_aurudu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWPoeAQ48_BXDd5HQIM0yFSW3bc9RjoNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
