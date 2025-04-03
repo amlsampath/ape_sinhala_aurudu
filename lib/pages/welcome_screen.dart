@@ -3,13 +3,22 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ape_sinhala_aurudu/pages/home_screen.dart';
 import 'package:sinhala_unicode_converter/sinhala_unicode_converter.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+  WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    // Log welcome screen view
+    analytics.logEvent(
+      name: 'welcome_screen_view',
+      parameters: {'timestamp': DateTime.now().toIso8601String()},
+    );
 
     return Scaffold(
       backgroundColor: HexColor('#f0cc62'),
@@ -54,6 +63,12 @@ class WelcomeScreen extends StatelessWidget {
           SizedBox(height: size.height * .15),
           ElevatedButton(
             onPressed: () async {
+              // Log button press event
+              analytics.logEvent(
+                name: 'welcome_screen_enter_button_pressed',
+                parameters: {'timestamp': DateTime.now().toIso8601String()},
+              );
+
               // Save that user has seen welcome screen
               final prefs = await SharedPreferences.getInstance();
               await prefs.setBool('hasSeenWelcome', true);
